@@ -1,4 +1,5 @@
 import { useState } from "react"
+import IngList from "./IngList";
 
 export default function Main() {
 
@@ -9,14 +10,24 @@ export default function Main() {
         if (ingredient) {
             ingredient = ingredient.trim();
             setIngredients((prev) => [...prev, ingredient]);
-        } else {
-            alert('Please add an ingredient');
         }
     }
 
     const removeIngredient = (index: number) => {
         setIngredients((prev) => prev.filter((_, i) => i !== index));
     };
+
+    function getRecipe() {
+        return (
+            <div className="get-recipe-container mx-auto">
+                <div>
+                    <h3>Ready for a recipe?</h3>
+                    <p>Generate a recipe from your list of ingredients.</p>
+                </div>
+                <button>Get a recipe</button>
+            </div>
+        )
+    }
 
     return (
         <main className="container-xl pt-5">
@@ -30,14 +41,9 @@ export default function Main() {
                 />
                 <button className="col-4">Add ingredient</button>
             </form>
-            <ul className="list-group mt-3">
-                {ingredients.map((ingredient, index) => (
-                    <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                        {ingredient}
-                        <button className="btn btn-danger btn-sm" onClick={() => removeIngredient(index)}>Remove</button>
-                    </li>
-                ))}
-            </ul>
+            
+            {ingredients.length > 0 && (<IngList ingredients={ingredients} removeIngredient={removeIngredient} />)}
+            {ingredients.length > 3 && getRecipe()}
         </main>
     )
 }
