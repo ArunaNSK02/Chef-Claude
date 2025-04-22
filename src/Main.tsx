@@ -4,7 +4,7 @@ export default function Main() {
 
     const [ingredients, setIngredients] = useState<string[]>([]);
 
-    const addIngredient = (FormData: any) => {
+    const addIngredient = (FormData: FormData) => {
         let ingredient = FormData.get('ingredient') as string;
         if (ingredient) {
             ingredient = ingredient.trim();
@@ -20,7 +20,7 @@ export default function Main() {
 
     return (
         <main className="container-xl pt-5">
-            <form onSubmit={addIngredient} className="row add-ingredient-form d-flex justify-content-evenly mx-auto">
+            <form action={addIngredient} className="row add-ingredient-form d-flex justify-content-evenly mx-auto">
                 <input 
                     type="text"
                     placeholder="e.g. oregano"
