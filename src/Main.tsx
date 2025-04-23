@@ -1,5 +1,6 @@
 import { useState } from "react"
 import IngList from "./IngList";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Main() {
 
@@ -10,6 +11,16 @@ export default function Main() {
         if (ingredient) {
             ingredient = ingredient.trim();
             setIngredients((prev) => [...prev, ingredient]);
+        } else {
+            toast.error('Please enter an ingredient before adding!', {
+                duration: 2000,
+              
+                // Styling
+                className: 'toast-class',
+              
+                // Additional Configuration
+                removeDelay: 1000,
+              });
         }
     }
 
@@ -41,9 +52,30 @@ export default function Main() {
                 />
                 <button className="col-4">Add ingredient</button>
             </form>
-            
+
             {ingredients.length > 0 && (<IngList ingredients={ingredients} removeIngredient={removeIngredient} />)}
+
+            {ingredients.length === 0 ? (
+                <span className="row user-guides mt-5">
+                    Need a recipe? Give me 4 ingredients!
+                </span>
+            ) : ingredients.length === 1 ? (
+                <span className="row user-guides mt-5">
+                    Hooray! 3 more to go.
+                </span>
+            ) : ingredients.length === 2 ? (
+                <span  className="row user-guides mt-5">
+                    Keep going! Add more ingredients!
+                </span>
+            ) : ingredients.length === 3 ? (
+                <span  className="row user-guides mt-5">
+                    Give me one more ingredient!
+                </span>
+            ) : null}
+
             {ingredients.length > 3 && getRecipe()}
+
+            <Toaster position="bottom-right" reverseOrder={false} />
         </main>
     )
 }

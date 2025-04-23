@@ -11967,4 +11967,18 @@ textarea.form-control-lg {
   cursor: pointer;
 }
 
+.user-guides {
+  color: #907575;
+  font-family: "Playwrite AU SA", cursive;
+  font-size: 1rem;
+  width: fit-content;
+  margin-inline: auto;
+}
+
+.toast-class {
+  color: #ff4b4b;
+  font-weight: bold;
+  width: 300px;
+}
+
 /*# sourceMappingURL=custom.css.map */
